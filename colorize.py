@@ -71,7 +71,14 @@ if __name__=='__main__':
     optimizer = optim.Adam(unet.parameters(), lr=lr)
     writer = SummaryWriter(f'runs/{exp_name}')
     train(unet, optimizer, loader, epochs=epochs, writer=writer)
-    writer.add_graph(unet)
+    
+    # Get some example inputs from your loader.
+    x_example, _ = next(iter(loader))
+    x_example = x_example.to(device)
+
+    # Pass example inputs to add_graph method.
+    writer.add_graph(unet, x_example)
+
 
     # Save model weights
     torch.save(unet.state_dict(), 'unet.pth')
