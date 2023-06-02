@@ -64,9 +64,9 @@ class UNet(nn.Module):
         
         x = self.middle_conv_block(x)
         
-        x = self.upsample_block_1(x, x_skip3) #use upsampleblock_3 and x_skip3
+        x = self.upsample_block_3(x, x_skip3) #use upsampleblock_3 and x_skip3
         x = self.upsample_block_2(x, x_skip2) #use upsampleblock_2 and x_skip2
-        x = self.upsample_block_3(x, x_skip1) #use upsampleblock_1 and x_skip1       
+        x = self.upsample_block_1(x, x_skip1) #use upsampleblock_1 and x_skip1       
         
         out = self.last_conv(x)
         
